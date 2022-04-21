@@ -1,5 +1,6 @@
 package com.empresa.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,8 @@ public class DocenteController {
 	public ResponseEntity<Map<String, Object>> insertaDocente(@RequestBody Docente obj) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
+			obj.setEstado(Constantes.ESTADO_ACTIVO);
+			obj.setFechaRegistro(new Date());
 			Docente objSalida = docenteService.insertaActualizaDocente(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);

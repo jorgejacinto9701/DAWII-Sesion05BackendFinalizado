@@ -1,5 +1,7 @@
 package com.empresa.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "docente")
@@ -17,10 +21,32 @@ public class Docente {
 	private int idDocente;
 	private String nombre;
 	private String dni;
+	private int estado;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaRegistro;
+	
 	@ManyToOne
 	@JoinColumn(name = "idUbigeo")
 	private Ubigeo ubigeo;
+	
+	public int getEstado() {
+		return estado;
+	}
+
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+
 
 	public int getIdDocente() {
 		return idDocente;
