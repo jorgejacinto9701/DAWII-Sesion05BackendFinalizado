@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "docente")
 public class Docente {
@@ -23,17 +25,15 @@ public class Docente {
 	private String dni;
 	private int estado;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaRegistro;
-	
 	@ManyToOne
 	@JoinColumn(name = "idUbigeo")
 	private Ubigeo ubigeo;
 	
-	public int getEstado() {
-		return estado;
-	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date fechaRegistro;
 
+	
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
@@ -42,11 +42,13 @@ public class Docente {
 		this.fechaRegistro = fechaRegistro;
 	}
 
+	public int getEstado() {
+		return estado;
+	}
+
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-
-
 
 	public int getIdDocente() {
 		return idDocente;
